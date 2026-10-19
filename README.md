@@ -14,6 +14,10 @@ SlothOps AI is a local-first DevOps log analyzer powered by an open-weight model
 
 > Local inference is only as private as your setup. Use a local Ollama endpoint, don't expose it publicly, and remove credentials/tokens from logs before analysis.
 
+## Project Screenshot
+
+![SlothOps AI Dashboard](image.png)
+
 ## Features
 
 - Local AI diagnosis with summary, likely cause, evidence, and next steps
