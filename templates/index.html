@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SlothOps AI — Local DevOps Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">S</div>
+    <div><div class="brand">SlothOps AI</div><div class="subbrand">LOCAL DEVOPS COPILOT</div></div>
+    <span class="local-pill"><span class="dot"></span> Runs locally</span>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">SLOW AND STEADY · OPEN-SOURCE AI</div>
+      <h1>Let the logs do<br><span>the talking.</span></h1>
+      <p>Paste a confusing error. Get a calm, practical explanation and safe next steps — powered by your local Ollama model.</p>
+    </section>
+    <section class="workspace">
+      <div class="panel input-panel">
+        <div class="panel-heading"><div><span class="step">01</span> Incident input</div><span class="tiny">PRIVATE BY DESIGN</span></div>
+        <label for="task">What are you investigating?</label>
+        <input id="task" value="Find the likely root cause and suggest safe next steps" maxlength="300">
+        <div class="label-row"><label for="logs">Logs or error output</label><span id="char-count">0 chars</span></div>
+        <textarea id="logs" placeholder="Paste Docker, Kubernetes, Linux, CI/CD or application logs here…"></textarea>
+        <div class="file-row"><label class="file-button" for="file-input">＋ Upload .log / .txt</label><input id="file-input" type="file" accept=".log,.txt,.out,.json,.yaml,.yml" hidden><span id="file-name">or paste text directly</span></div>
+        <div class="examples">
+          <span>Try sample:</span>
+          <button type="button" class="sample" data-sample="docker">Docker</button>
+          <button type="button" class="sample" data-sample="k8s">Kubernetes</button>
+          <button type="button" class="sample" data-sample="linux">Linux</button>
+        </div>
+        <button id="analyze" class="primary"><span>Analyze incident</span><span>↗</span></button>
+        <p class="fineprint">Your log text is sent only to the local Ollama service configured on this machine. Review logs for secrets before analysis.</p>
+      </div>
+      <div class="panel output-panel">
+        <div class="panel-heading"><div><span class="step">02</span> AI diagnosis</div><span class="tiny" id="model-label">MODEL: {{ model }}</span></div>
+        <div id="empty-state" class="empty-state">
+          <div class="orb">✳</div><h2>Your diagnosis will appear here</h2>
+          <p>We'll look for error patterns, explain what may be happening, and recommend safe next steps.</p>
+          <div class="feature-list"><div><span>✓</span> Plain-English summary</div><div><span>✓</span> Likely root cause</div><div><span>✓</span> Actionable next steps</div></div>
+        </div>
+        <div id="loading" class="loading" hidden><div class="spinner"></div><h2>Reading the signals…</h2><p>Local AI is investigating your logs.</p></div>
+        <div id="error" class="error" hidden></div>
+        <div id="results" hidden>
+          <div class="signal-box"><div class="result-label">QUICK SCAN SIGNALS</div><div id="signals" class="signals"></div></div>
+          <div class="result-label ai-label">AI ANALYSIS</div>
+          <article id="analysis" class="analysis"></article>
+          <button id="copy" class="secondary">Copy diagnosis</button>
+        </div>
+      </div>
+    </section>
+    <footer><span>🦥 Built to do less busywork.</span><span>Open-weight model · Local inference · No API key</span></footer>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
